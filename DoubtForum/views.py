@@ -38,7 +38,7 @@ def add_doubt(request):
     return render(request,'addDoubt.html',context)
 
 
-def blog_category(request, tag):
+def tagged_doubts(request, tag):
     form = DoubtForm()
     doubts = Doubt.objects.filter(
         tags__name__contains=tag
@@ -52,7 +52,7 @@ def blog_category(request, tag):
     }
     return render(request, "home.html", context)
 
-def blog_detail(request, pk):
+def doubt_complete(request, pk):
     doubt = Doubt.objects.get(pk=pk)
 
     form = CommentForm()
@@ -73,4 +73,12 @@ def blog_detail(request, pk):
         "form": form,
     }
 
-    return render(request, "blog_detail.html", context)
+    return render(request, "doubtComplete.html", context)
+
+def tag_list(request):
+    tags = Tag.objects.all()
+    context = {
+        "tags": tags,
+    }
+
+    return render(request, "tagList.html", context)

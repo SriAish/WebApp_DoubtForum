@@ -8,12 +8,12 @@
     <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Post a Doubt</button>
     </form>
     {% for doubt in doubts %}
-    <h2><a href="{% url 'blog_detail' doubt.pk%}">{{ doubt.title }}</a></h2>
+    <h2><a href="{% url 'doubt_complete' doubt.pk%}">{{ doubt.title }}</a></h2>
     <small>
         {{ doubt.created_on.date }} |&nbsp;
-        Categories:&nbsp;
+        Subject:&nbsp;
         {% for tag in doubt.tags.all %}
-        <a href="{% url 'blog_category' tag.name %}">
+        <a href="{% url 'tagged_doubts' tag.name %}">
             {{ tag.name }}
         </a>&nbsp;
         {% endfor %}

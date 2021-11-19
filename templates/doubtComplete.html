@@ -6,14 +6,14 @@
         {{ doubt.created_on.date }} |&nbsp;
         Categories:&nbsp;
         {% for tag in doubt.tags.all %}
-        <a href="{% url 'blog_category' tag.name %}">
+        <a href="{% url 'tagged_doubts' tag.name %}">
             {{ tag.name }}
         </a>&nbsp;
         {% endfor %}
     </small>
     <p>{{ doubt.body | linebreaks }}</p>
     <h3>Leave a comment:</h3>
-    <form action="{% url 'blog_detail' doubt.pk%}" method="POST">
+    <form action="{% url 'doubt_complete' doubt.pk%}" method="POST">
         {% csrf_token %}
         <div class="form-group">
             {{ form.author }}
