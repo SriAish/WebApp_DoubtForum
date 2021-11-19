@@ -1,12 +1,22 @@
 from django.shortcuts import render,redirect
 from .models import * 
 from .forms import * 
+from django.contrib import messages
 # Create your views here.
  
 def home(request):
     doubts = Doubt.objects.all().order_by('-created_on')
-    tags = Tag.objects.all()
+    
+    context = {
+        "doubts": doubts,
+    }
+
+    return render(request, "home.html", context)
+ 
+def add_doubt(request):
     form = DoubtForm()
+    tags = Tag.objects.all()
+
     if request.method == 'POST':
         form = DoubtForm(request.POST)
         if form.is_valid():
@@ -17,13 +27,17 @@ def home(request):
                 title=form.cleaned_data["title"],
             )
             doubt.tags.set([form.cleaned_data["tag"]])
-    context = {
-        "doubts": doubts,
-        "tags": tags,
-        "form": form
+            doubt.save()
+            return redirect('/')
+
+    context ={
+        "form": form,
+        "tags": tags
     }
-    return render(request, "home.html", context)
- 
+
+    return render(request,'addDoubt.html',context)
+
+
 def blog_category(request, tag):
     form = DoubtForm()
     doubts = Doubt.objects.filter(

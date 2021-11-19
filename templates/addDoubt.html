@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+    <h1>Add Doubt</h1>
+    <form action="{% url 'add_doubt' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            {{ form.body }}
+        </div>
+        <div class="form-group">
+            {{ form.author }}
+        </div>
+        <div class="form-group">
+            {{ form.link }}
+        </div>
+        <div class="form-group">
+            {{ form.tag }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

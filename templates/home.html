@@ -3,27 +3,12 @@
 <div class="col-md-8 offset-md-2">
     <h1>Blog Index</h1>
     <hr>
-    <form action="/" method="post">
+    <form method="POST" action="{% url 'add_doubt' %}">
         {% csrf_token %}
-        <div class="form-group">
-            {{ form.title }}
-        </div>
-        <div class="form-group">
-            {{ form.body }}
-        </div>
-        <div class="form-group">
-            {{ form.author }}
-        </div>
-        <div class="form-group">
-            {{ form.link }}
-        </div>
-        <div class="form-group">
-            {{ form.tag }}
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+    <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Post a Doubt</button>
     </form>
     {% for doubt in doubts %}
-    <h2><a href="{% url 'blog_detail' doubt.pk%}">{{ post.title }}</a></h2>
+    <h2><a href="{% url 'blog_detail' doubt.pk%}">{{ doubt.title }}</a></h2>
     <small>
         {{ doubt.created_on.date }} |&nbsp;
         Categories:&nbsp;

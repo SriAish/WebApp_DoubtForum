@@ -8,8 +8,8 @@ class Tag(models.Model):
         return str(self.name)
 
 class Doubt(models.Model):
-    author = models.CharField(max_length=60)
-    title = models.CharField(max_length=10, unique=True)
+    author = models.CharField(max_length=20)
+    title = models.CharField(max_length=60)
     body = models.TextField()
     link = models.CharField(max_length=50 ,null =True)
     created_on = models.DateTimeField(auto_now_add=True)

@@ -20,6 +20,7 @@ from DoubtForum.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home,name='home'),
+    path('add_doubt/',add_doubt,name='add_doubt'),
     path('<int:pk>/',blog_detail,name='blog_detail'),
     path('<tag>/',blog_category,name='blog_category'),
 ]
