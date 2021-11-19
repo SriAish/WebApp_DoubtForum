@@ -3,17 +3,13 @@
 <div class="col-md-8 offset-md-2">
     <h1>Blog Index</h1>
     <hr>
-    <form method="POST" action="{% url 'add_doubt' %}">
-        {% csrf_token %}
-    <button class="btn btn-success" style="width:fit-content; padding: 4px; margin:10px;">Post a Doubt</button>
-    </form>
     {% for doubt in doubts %}
-    <h2><a href="{% url 'doubt_complete' doubt.pk%}">{{ doubt.title }}</a></h2>
+    <h2><a href="{% url 'doubt_complete' doubt.pk%}" class="text-secondary">{{ doubt.title }}</a></h2>
     <small>
         {{ doubt.created_on.date }} |&nbsp;
         Subject:&nbsp;
         {% for tag in doubt.tags.all %}
-        <a href="{% url 'tagged_doubts' tag.name %}">
+        <a href="{% url 'tagged_doubts' tag.name %}" class="text-info">
             {{ tag.name }}
         </a>&nbsp;
         {% endfor %}

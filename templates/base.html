@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+<style type="text/css">
+  body { background: black !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+</style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">Doubt Forum</a>
@@ -9,11 +11,14 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'tag_list' %}">Subjects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_doubt' %}">Post a Doubt</a>
             </li>
           </ul>
         </div>
@@ -21,7 +26,7 @@
 
 </nav>
 
-<div class="container">
+<div class="container text-white">
     {% block page_content %}{% endblock %}
 </div>
 

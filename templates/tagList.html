@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block page_content %}
 <div class="col-md-8 offset-md-2">
-    <h1>Tag Index</h1>
+    <h1>Subject List</h1>
     <hr>
     {% for tag in tags %}
         <h2><a href="{% url 'tagged_doubts' tag.name %}">
