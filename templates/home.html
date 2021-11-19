@@ -1,20 +1,29 @@
 {% extends "base.html" %}
 {% block page_content %}
-<div class="col-md-8 offset-md-2">
-    <h1>Blog Index</h1>
+<div class="col-md-12">
+    <hr>    
+    <div class="page-header text-center mt-3">
+        <h3>Discussions</h3>
+        <h6>Doubts and Problem Discussions</h6>
+    </div>
+    
     <hr>
     {% for doubt in doubts %}
-    <h2><a href="{% url 'doubt_complete' doubt.pk%}" class="text-secondary">{{ doubt.title }}</a></h2>
-    <small>
-        {{ doubt.created_on.date }} |&nbsp;
-        Subject:&nbsp;
-        {% for tag in doubt.tags.all %}
-        <a href="{% url 'tagged_doubts' tag.name %}" class="text-info">
-            {{ tag.name }}
-        </a>&nbsp;
-        {% endfor %}
-    </small>
-    <p>{{ doubt.body | slice:":400" }}...</p>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'doubt_complete' doubt.pk%}" class="text-secondary">{{ doubt.title }}</a></h2>
+            <h6 class="card-subtitle mb-2 text-muted">
+                {{ doubt.created_on.date }} |&nbsp; {{ doubt.author }} </h6>
+                Subject:&nbsp;
+                {% for tag in doubt.tags.all %}
+                <a href="{% url 'tagged_doubts' tag.name %}" class="text-info">
+                    {{ tag.name }}
+                </a>&nbsp;
+                {% endfor %}
+            
+            <p class="card-text">{{ doubt.body | slice:":400" }}...</p>
+        </div>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

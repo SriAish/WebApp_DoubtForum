@@ -25,12 +25,14 @@ class DoubtForm(forms.Form):
     )
     link = forms.CharField(
         max_length=50,
+        required=False,
         widget=forms.TextInput(attrs={
             "class": "form-control",
             "placeholder": "Reference Link"
         })
     )
     tag = forms.ModelChoiceField(queryset=Tag.objects.all())
+    
 
 class CommentForm(forms.Form):
     author = forms.CharField(

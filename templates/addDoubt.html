@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block page_content %}
 <div class="col-md-8 offset-md-2">
-    <h1>Add Doubt</h1>
+    <h1>Your Doubt</h1>
     <form action="{% url 'add_doubt' %}" method="POST">
         {% csrf_token %}
         <div class="form-group">

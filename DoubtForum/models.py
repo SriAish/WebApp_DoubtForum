@@ -11,7 +11,7 @@ class Doubt(models.Model):
     author = models.CharField(max_length=20)
     title = models.CharField(max_length=60)
     body = models.TextField()
-    link = models.CharField(max_length=50 ,null =True)
+    link = models.CharField(max_length=50, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     tags = models.ManyToManyField('Tag', related_name='doubts')
 

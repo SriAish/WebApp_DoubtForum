@@ -12,17 +12,24 @@
         {% endfor %}
     </small>
     <p>{{ doubt.body | linebreaks }}</p>
-    <h3>Leave a comment:</h3>
-    <form action="{% url 'doubt_complete' doubt.pk%}" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-            {{ form.author }}
-        </div>
-        <div class="form-group">
-            {{ form.body }}
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    {% if doubt.link is null or blank%}
+    {% else %}
+        <a href="{{doubt.link}}" class="card-link text-info">Reference Link</a>
+    {% endif %}
+    <button href="#Bar" class="btn btn-default" data-toggle="collapse">Comment</button>
+    <div id="Bar" class="collapse in">
+        <h3>Leave a comment:</h3>
+        <form action="{% url 'doubt_complete' doubt.pk%}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.author }}
+            </div>
+            <div class="form-group">
+                {{ form.body }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
     <h3>Comments:</h3>
     {% for comment in comments %}
     <p>

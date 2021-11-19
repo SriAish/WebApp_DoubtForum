@@ -21,11 +21,13 @@ def add_doubt(request):
         form = DoubtForm(request.POST)
         if form.is_valid():
             doubt = Doubt.objects.create(
-                author=form.cleaned_data["author"],
-                body=form.cleaned_data["body"],
-                link=form.cleaned_data["link"],
-                title=form.cleaned_data["title"],
-            )
+                    author=form.cleaned_data["author"],
+                    body=form.cleaned_data["body"],
+                    link=form.cleaned_data["link"],
+                    title=form.cleaned_data["title"],
+                )
+            if(form.cleaned_data["link"] == ""):
+                doubt.link=None
             doubt.tags.set([form.cleaned_data["tag"]])
             doubt.save()
             return redirect('/')
