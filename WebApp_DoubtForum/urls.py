@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from DoubtForum.views import *
- 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',home,name='home'),
-    path('add_doubt/',add_doubt,name='add_doubt'),
-    path('tag_list/',tag_list,name='tag_list'),
-    path('<int:pk>/',doubt_complete,name='doubt_complete'),
-    path('<tag>/',tagged_doubts,name='tagged_doubts'),
+    path('', home, name='home'),
+    path('add_doubt/', add_doubt, name='add_doubt'),
+    path('tag_list/', tag_list, name='tag_list'),
+    path('<int:pk>/', doubt_complete, name='doubt_complete'),
+    path('<tag>/', tagged_doubts, name='tagged_doubts')
 ]

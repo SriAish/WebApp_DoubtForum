@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from .models import *
 from django import forms
 
+
 class DoubtForm(forms.Form):
     title = forms.CharField(
         max_length=100,
@@ -32,7 +33,7 @@ class DoubtForm(forms.Form):
         })
     )
     tag = forms.ModelChoiceField(queryset=Tag.objects.all())
-    
+
 
 class CommentForm(forms.Form):
     author = forms.CharField(

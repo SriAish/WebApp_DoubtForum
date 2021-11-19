@@ -1,11 +1,12 @@
-from django.db import models 
-    
+from django.db import models
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=20)
 
     def __str__(self):
         return str(self.name)
+
 
 class Doubt(models.Model):
     author = models.CharField(max_length=20)
@@ -17,6 +18,7 @@ class Doubt(models.Model):
 
     def __str__(self):
         return str(self.title)
+
 
 class Comment(models.Model):
     author = models.CharField(max_length=60)
