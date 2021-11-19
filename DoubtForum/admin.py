@@ -2,5 +2,11 @@ from django.contrib import admin
 from .models import *
  
 # Register your models here.
-admin.site.register(forum)
-admin.site.register(Discussion)
+class DoubtAdmin(admin.ModelAdmin):
+    pass
+
+class TagAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Doubt, DoubtAdmin)
+admin.site.register(Tag, TagAdmin)

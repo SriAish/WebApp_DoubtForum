@@ -1,12 +1,48 @@
 from django.forms import ModelForm
 from .models import *
- 
-class CreateInForum(ModelForm):
-    class Meta:
-        model= forum
-        fields = "__all__"
- 
-class CreateInDiscussion(ModelForm):
-    class Meta:
-        model= Discussion
-        fields = "__all__"
+from django import forms
+
+class DoubtForm(forms.Form):
+    title = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            "class": "form-control",
+            "placeholder": "Doubt Heading"
+        })
+    )
+    author = forms.CharField(
+        max_length=60,
+        widget=forms.TextInput(attrs={
+            "class": "form-control",
+            "placeholder": "Your Name"
+        })
+    )
+    body = forms.CharField(widget=forms.Textarea(
+        attrs={
+            "class": "form-control",
+            "placeholder": "Write your doubt here!"
+        })
+    )
+    link = forms.CharField(
+        max_length=50,
+        widget=forms.TextInput(attrs={
+            "class": "form-control",
+            "placeholder": "Reference Link"
+        })
+    )
+    tag = forms.ModelChoiceField(queryset=Tag.objects.all())
+
+class CommentForm(forms.Form):
+    author = forms.CharField(
+        max_length=60,
+        widget=forms.TextInput(attrs={
+            "class": "form-control",
+            "placeholder": "Your Name"
+        })
+    )
+    body = forms.CharField(widget=forms.Textarea(
+        attrs={
+            "class": "form-control",
+            "placeholder": "Leave a comment!"
+        })
+    )
