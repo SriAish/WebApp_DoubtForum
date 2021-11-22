@@ -2,11 +2,13 @@ from django.forms import ModelForm
 from .models import *
 from django import forms
 
+
 SEARCH_TYPES =(
-    ("Author", "Author"),
     ("Title", "Title"),
+    ("Author", "Author"),
     ("Subject", "Subject"),
 )
+
 
 class DoubtForm(forms.Form):
     title = forms.CharField(
@@ -37,7 +39,7 @@ class DoubtForm(forms.Form):
             "placeholder": "Reference Link"
         })
     )
-    tag = forms.ModelChoiceField(queryset=Tag.objects.all())
+    tag = forms.ModelChoiceField(queryset=Subject.objects.all())
 
 
 class CommentForm(forms.Form):

@@ -2,22 +2,34 @@
 <meta charset="utf-8"/>
     {% extends "base.html" %}
     {% block page_content %}
-    <div class="col-md-12">
-        <hr>    
-        <div class="page-header text-center mt-3">
-            <h3>Discussions</h3>
-            <h6>Doubts and Problem Discussions</h6>
+    <div
+          class="p-5 m-1 text-center bg-image border border-secondary border-5"
+          style="
+          background-image: url('https://i.ibb.co/wN8Q0nQ/imageonline-co-overlayed-image-6.png');
+          height: 250;
+          background-repeat: no-repeat;
+          background-size: cover;
+        "
+  >
+    <div class="mask">  
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+            <h1 class="mb-3">Discussions</h1>
+            <h4 class="mb-3">Doubts and Problem Discussions</h4>
+            <a class="btn btn-dark" href="{% url 'add_doubt' %}" role="button">Post a Doubt</a>
         </div>
-        
-        <hr>
+      </div>
+    </div>
+  </div>
+    <div class="col-md-12">
         {% for doubt in doubts %}
-        <div class="card mb-3">
+        <div class="card border-dark bg-light my-3">
             <div class="card-body">
                 <h5 class="card-title"><a href="{% url 'doubt_complete' doubt.pk%}" class="text-secondary">{{ doubt.title }}</a></h5>
                 <h6 class="card-subtitle mb-2 text-muted">
                     {{ doubt.created_on.date }} |&nbsp; {{ doubt.author }} </h6>
                     Subject:&nbsp;
-                    {% for tag in doubt.tags.all %}
+                    {% for tag in doubt.subject.all %}
                     <a href="{% url 'tagged_doubts' tag.name %}" class="text-info">
                         {{ tag.name }}
                     </a>&nbsp;

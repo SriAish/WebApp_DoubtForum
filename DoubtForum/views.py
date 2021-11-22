@@ -29,7 +29,7 @@ def add_doubt(request):
                 )
             if(form.cleaned_data["link"] == ""):
                 doubt.link = None
-            doubt.tags.set([form.cleaned_data["tag"]])
+            doubt.subject.set([form.cleaned_data["tag"]])
             doubt.save()
             return redirect('/')
 
@@ -42,7 +42,7 @@ def add_doubt(request):
 
 def tagged_doubts(request, tag):
     doubts = Doubt.objects.filter(
-        tags__name__contains=tag
+        subject__name__contains=tag
     ).order_by(
         '-created_on'
     )
@@ -57,6 +57,12 @@ def doubt_complete(request, pk):
     doubt = Doubt.objects.get(pk=pk)
 
     form = CommentForm()
+    comments = Comment.objects.filter(doubt=doubt).order_by('-created_on')
+    context = {
+        "doubt": doubt,
+        "comments": comments,
+        "form": form,
+    }
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -66,24 +72,18 @@ def doubt_complete(request, pk):
                 doubt=doubt
             )
             comment.save()
-
-    comments = Comment.objects.filter(doubt=doubt).order_by('-created_on')
-    context = {
-        "doubt": doubt,
-        "comments": comments,
-        "form": form,
-    }
+            return render(request, "doubtComplete.html", context)
 
     return render(request, "doubtComplete.html", context)
 
 
-def tag_list(request):
-    tags = Tag.objects.all()
+def subject_list(request):
+    tags = Subject.objects.all()
     context = {
         "tags": tags,
     }
 
-    return render(request, "tagList.html", context)
+    return render(request, "subjectList.html", context)
 
 
 def search_doubt(request):
@@ -119,7 +119,7 @@ def searched_doubts(request):
         )
     elif search_type == "Subject":
         doubts = Doubt.objects.filter(
-            tags__name__contains=search_query
+            subject__name__contains=search_query
         ).order_by(
             '-created_on'
         )
@@ -131,3 +131,12 @@ def searched_doubts(request):
         "doubts": doubts
     }
     return render(request, "searchResults.html", context)
+
+
+def doubt_sessions(request):
+    sessions = DoubtSession.objects.all().order_by('-scheduled_for')
+    context = {
+        "sessions": sessions,
+    }
+
+    return render(request, "schedule.html", context)

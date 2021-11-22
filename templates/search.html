@@ -14,15 +14,22 @@
     </div>
 </div> -->
 <div class="col-md-8 offset-md-2">
-    <h1>Your Doubt</h1>
+    <hr>    
+        <div class="page-header text-center mt-3">
+            <h1 class="display-4">Search for a Doubt</h1>
+        </div>
+    <hr>
     <form action="{% url 'search_doubt'%}" method="GET">
         {% csrf_token %}
         <div class="form-group">
             {{ form.search_query }} 
         </div>
         <div class="form-group form-inline justify-content-between">
-            {{ form.search_type }}
-            <button type="submit" class="btn btn-outline-primary btn-lg float-end justify-content-end">Search</button>
+            <div class="form-group form-inline">
+                <label>Search Type: &nbsp;</label>  
+                {{ form.search_type }}  
+            </div>
+            <button type="submit" class="btn btn-outline-primary float-end justify-content-end">Search</button>
         </div>
     </form>
 </div>

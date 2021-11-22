@@ -1,6 +1,8 @@
 <!DOCTYPE html>
   <meta charset="utf-8"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #563d7c;">
       <div class="container-fluid">
@@ -12,16 +14,26 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}">Home</a>
+                <a class="nav-link active" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'tag_list' %}">Subjects</a>
+                <a class="nav-link active" href="{% url 'subject_list' %}">Subjects</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'add_doubt' %}">Post a Doubt</a>
+                <a class="nav-link active" href="{% url 'search_doubt' %}">Search</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'add_doubt' %}">Post a Doubt</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'search_doubt' %}">Search</a>
+                <a class="nav-link active" href="{% url 'doubt_sessions' %}">Doubt Sessions</a>
+              </li>
+              <li>
+                <a class="nav-link waves-effect waves-light active" href="/admin/">
+                  <i class="bi bi-person-circle"></i>
+              </a>
               </li>
             </ul>
           </div>

@@ -6,8 +6,13 @@ class DoubtAdmin(admin.ModelAdmin):
     pass
 
 
-class TagAdmin(admin.ModelAdmin):
+class SubjectAdmin(admin.ModelAdmin):
+    pass
+
+
+class DoubtSessionAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Doubt, DoubtAdmin)
-admin.site.register(Tag, TagAdmin)
+admin.site.register(Subject, SubjectAdmin)
+admin.site.register(DoubtSession, DoubtSessionAdmin)
