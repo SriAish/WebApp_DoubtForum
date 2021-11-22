@@ -2,6 +2,11 @@ from django.forms import ModelForm
 from .models import *
 from django import forms
 
+SEARCH_TYPES =(
+    ("Author", "Author"),
+    ("Title", "Title"),
+    ("Subject", "Subject"),
+)
 
 class DoubtForm(forms.Form):
     title = forms.CharField(
@@ -47,5 +52,17 @@ class CommentForm(forms.Form):
         attrs={
             "class": "form-control",
             "placeholder": "Leave a comment!"
+        })
+    )
+
+
+class SearchForm(forms.Form):
+    search_type = forms.ChoiceField(choices=SEARCH_TYPES)
+    search_query = forms.CharField(
+        max_length=60,
+        widget=forms.TextInput(
+        attrs={
+            "class": "form-control",
+            "placeholder": "Search Query"
         })
     )

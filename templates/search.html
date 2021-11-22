@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+{% extends "base.html" %}
+{% block page_content %}
+<!-- <div class="col-md-8 offset-md-2">
+    <div class="input-group">
+        <form class="form-inline" action="{% url 'search_doubt'%}" method="GET">
+            <div class="form-group">
+        {{ form.search_type }}
+        {{ form.search_query }}
+        <button type="submit" class="btn btn-outline-primary">search</button>
+    </div>
+        </form>
+    </div>
+</div> -->
+<div class="col-md-8 offset-md-2">
+    <h1>Your Doubt</h1>
+    <form action="{% url 'search_doubt'%}" method="GET">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.search_query }} 
+        </div>
+        <div class="form-group form-inline justify-content-between">
+            {{ form.search_type }}
+            <button type="submit" class="btn btn-outline-primary btn-lg float-end justify-content-end">Search</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

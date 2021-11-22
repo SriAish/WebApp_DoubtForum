@@ -18,10 +18,10 @@
     {% else %}
         <a href="{{doubt.link}}" class="card-link text-info">Reference Link</a>
     {% endif %}
-    <button href="#Bar" class="btn btn-default" data-toggle="collapse">Comment</button>
+    <button href="#Bar" class="btn btn-primary" data-toggle="collapse">Add a Comment</button>
     <div id="Bar" class="collapse in">
         <h3>Leave a comment:</h3>
-        <form action="{% url 'doubt_complete' doubt.pk%}" method="POST">
+        <form action="{% url 'doubt_complete' doubt.pk%}" method="POST" class="justify-content-between">
             {% csrf_token %}
             <div class="form-group">
                 {{ form.author }}
@@ -29,17 +29,19 @@
             <div class="form-group">
                 {{ form.body }}
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-outline-primary ml-auto">Comment</button>
         </form>
     </div>
-    <h3>Comments:</h3>
+    <!-- <hr/> -->
+    <h3 class="display-6 pt-3">Comments:</h3>
     {% for comment in comments %}
-    <p>
-        On {{comment.created_on.date }}&nbsp;
-        <b>{{ comment.author }}</b> wrote:
-    </p>
-    <p>{{ comment.body }}</p>
-    <hr>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h7 class="card-title">On {{comment.created_on.date }}&nbsp;
+                <b>{{ comment.author }}</b> wrote:</h7>
+            <p class="card-text">{{ comment.body }}...</p>
+        </div>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

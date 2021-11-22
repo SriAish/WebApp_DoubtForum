@@ -17,7 +17,6 @@ def home(request):
 
 def add_doubt(request):
     form = DoubtForm()
-    tags = Tag.objects.all()
 
     if request.method == 'POST':
         form = DoubtForm(request.POST)
@@ -35,26 +34,23 @@ def add_doubt(request):
             return redirect('/')
 
     context = {
-        "form": form,
-        "tags": tags
+        "form": form
     }
 
     return render(request, 'addDoubt.html', context)
 
 
 def tagged_doubts(request, tag):
-    form = DoubtForm()
     doubts = Doubt.objects.filter(
         tags__name__contains=tag
     ).order_by(
         '-created_on'
     )
     context = {
-        "tag": tag,
-        "doubts": doubts,
-        "form": form
+        "query": tag,
+        "doubts": doubts
     }
-    return render(request, "home.html", context)
+    return render(request, "searchResults.html", context)
 
 
 def doubt_complete(request, pk):
@@ -71,7 +67,7 @@ def doubt_complete(request, pk):
             )
             comment.save()
 
-    comments = Comment.objects.filter(doubt=doubt)
+    comments = Comment.objects.filter(doubt=doubt).order_by('-created_on')
     context = {
         "doubt": doubt,
         "comments": comments,
@@ -88,3 +84,50 @@ def tag_list(request):
     }
 
     return render(request, "tagList.html", context)
+
+
+def search_doubt(request):
+    form = SearchForm()
+
+    if request.method == 'GET':
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            request.session['search_type'] = form.cleaned_data['search_type']
+            request.session['search_query'] = form.cleaned_data['search_query']
+            return redirect('searched_doubts')
+    context = {
+        "form": form
+    }
+
+    return render(request, 'search.html', context)
+
+
+def searched_doubts(request):
+    search_type = request.session.get('search_type')
+    search_query = request.session.get('search_query')
+    if search_type == "Author":
+        doubts = Doubt.objects.filter(
+            author__contains=search_query
+        ).order_by(
+            '-created_on'
+        )
+    elif search_type == "Title":
+        doubts = Doubt.objects.filter(
+            title__contains=search_query
+        ).order_by(
+            '-created_on'
+        )
+    elif search_type == "Subject":
+        doubts = Doubt.objects.filter(
+            tags__name__contains=search_query
+        ).order_by(
+            '-created_on'
+        )
+    else:
+        doubts = []
+
+    context = {
+        "query": search_query,
+        "doubts": doubts
+    }
+    return render(request, "searchResults.html", context)

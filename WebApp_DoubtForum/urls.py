@@ -21,6 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('add_doubt/', add_doubt, name='add_doubt'),
+    path('searched_doubts/', searched_doubts, name='searched_doubts'),
+    path('search_doubt/', search_doubt, name='search_doubt'),
     path('tag_list/', tag_list, name='tag_list'),
     path('<int:pk>/', doubt_complete, name='doubt_complete'),
     path('<tag>/', tagged_doubts, name='tagged_doubts')
