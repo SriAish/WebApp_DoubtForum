@@ -5,7 +5,7 @@
     <div
           class="p-5 m-1 text-center bg-image border border-secondary border-5"
           style="
-          background-image: url('https://i.ibb.co/wN8Q0nQ/imageonline-co-overlayed-image-6.png');
+          background-image: url('https://i.ibb.co/0mg2VFd/imageonline-co-overlayed-image-6.png');
           height: 250;
           background-repeat: no-repeat;
           background-size: cover;
@@ -25,7 +25,7 @@
         {% for doubt in doubts %}
         <div class="card border-dark bg-light my-3">
             <div class="card-body">
-                <h5 class="card-title"><a href="{% url 'doubt_complete' doubt.pk%}" class="text-secondary">{{ doubt.title }}</a></h5>
+                <h5 class="card-title"><a href="{% url 'doubt_complete' doubt.pk%}" class="text-dark">{{ doubt.title }}</a></h5>
                 <h6 class="card-subtitle mb-2 text-muted">
                     {{ doubt.created_on.date }} |&nbsp; {{ doubt.author }} </h6>
                     Subject:&nbsp;

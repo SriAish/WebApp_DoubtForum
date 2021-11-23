@@ -13,7 +13,7 @@
         {% for doubt in doubts %}
         <div class="card border-dark bg-light mb-3">
             <div class="card-body">
-                <h5 class="card-title"><a href="{% url 'doubt_complete' doubt.pk%}" class="text-secondary">{{ doubt.title }}</a></h5>
+                <h5 class="card-title"><a href="{% url 'doubt_complete' doubt.pk%}" class="text-dark">{{ doubt.title }}</a></h5>
                 <h6 class="card-subtitle mb-2 text-muted">
                     {{ doubt.created_on.date }} |&nbsp; {{ doubt.author }} </h6>
                     Subject:&nbsp;
