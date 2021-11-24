@@ -1,4 +1,3 @@
-from django.forms import ModelForm
 from .models import *
 from django import forms
 
@@ -11,6 +10,9 @@ SEARCH_TYPES =(
 
 
 class DoubtForm(forms.Form):
+    """
+    Class to collect information to create a doubt object.
+    """
     title = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={
@@ -31,10 +33,10 @@ class DoubtForm(forms.Form):
             "placeholder": "Write your doubt here!"
         })
     )
-    link = forms.CharField(
+    link = forms.URLField(
         max_length=50,
         required=False,
-        widget=forms.TextInput(attrs={
+        widget=forms.URLInput(attrs={
             "class": "form-control",
             "placeholder": "Reference Link"
         })
@@ -43,6 +45,9 @@ class DoubtForm(forms.Form):
 
 
 class CommentForm(forms.Form):
+    """
+    Class to collect information to create a comment object.
+    """
     author = forms.CharField(
         max_length=60,
         widget=forms.TextInput(attrs={
@@ -59,6 +64,9 @@ class CommentForm(forms.Form):
 
 
 class SearchForm(forms.Form):
+    """
+    Class to collect information on search string.
+    """
     search_type = forms.ChoiceField(choices=SEARCH_TYPES)
     search_query = forms.CharField(
         max_length=60,

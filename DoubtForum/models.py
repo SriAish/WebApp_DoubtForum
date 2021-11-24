@@ -2,6 +2,9 @@ from django.db import models
 
 
 class Subject(models.Model):
+    """
+    Stores a single subject.
+    """
     name = models.CharField(max_length=20)
 
     def __str__(self):
@@ -9,18 +12,24 @@ class Subject(models.Model):
 
 
 class Doubt(models.Model):
+    """
+    Stores a single doubt, related to :model:`DoubtForum.Subject`.
+    """
     author = models.CharField(max_length=20)
     title = models.CharField(max_length=160)
     body = models.TextField()
-    link = models.CharField(max_length=50, null=True, blank=True)
+    link = models.URLField(max_length=50, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
-    subject = models.ManyToManyField('Subject', related_name='doubts')
+    subject = models.ForeignKey('Subject', on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.title)
 
 
 class Comment(models.Model):
+    """
+    Stores a single comment, related to :model:`DoubtForum.Doubt`.
+    """
     author = models.CharField(max_length=60)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
@@ -31,11 +40,14 @@ class Comment(models.Model):
 
 
 class DoubtSession(models.Model):
+    """
+    Stores a single doubt session, related to :model:`DoubtForum.Subject`.
+    """
     professor = models.CharField(max_length=60)
     body = models.TextField()
     scheduled_for = models.DateTimeField()
     subject = models.ForeignKey('Subject', on_delete=models.CASCADE)
-    link_to_session = models.CharField(max_length=50, null=True, blank=True)
+    link_to_session = models.URLField(max_length=50, null=True, blank=True)
     
     def __str__(self):
         return str(self.subject.name)

@@ -4,8 +4,18 @@ from .forms import *
 
 
 def home(request):
+    """
+    Display all instances of :model:`DoubtForum.Doubt`.
 
-    """Renders the home page which has all doubts."""
+    **Context**
+
+    ``doubts``
+        Objects in doubts are an instance of :model:`DoubtForum.Doubt`.
+
+    **Template:**
+
+    :template:`templates/home.html`
+    """
     doubts = Doubt.objects.all().order_by('-created_on')
 
     context = {
@@ -16,6 +26,19 @@ def home(request):
 
 
 def add_doubt(request):
+    """
+    Display an individual :form:`DoubtForum.DoubtForm`.
+    Creates a new :model:`DoubtForum.Doubt` on POST.
+
+    **Context**
+
+    ``form``
+        An instance of :form:`DoubtForum.DoubtForm`.
+
+    **Template:**
+
+    :template:`templates/addDoubt.html`
+    """
     form = DoubtForm()
 
     if request.method == 'POST':
@@ -26,10 +49,10 @@ def add_doubt(request):
                     body=form.cleaned_data["body"],
                     link=form.cleaned_data["link"],
                     title=form.cleaned_data["title"],
+                    subject=form.cleaned_data["tag"]
                 )
             if(form.cleaned_data["link"] == ""):
                 doubt.link = None
-            doubt.subject.set([form.cleaned_data["tag"]])
             doubt.save()
             return redirect('/')
 
@@ -41,6 +64,18 @@ def add_doubt(request):
 
 
 def tagged_doubts(request, tag):
+    """
+    Display all instances od :model:`DoubtForum.Doubt` with :model:`DoubtForum.Doubt.subject` = tag.
+
+    **Context**
+
+    ``doubts``
+        Objects in doubts are an instance of :model:`DoubtForum.Doubt`.
+
+    **Template:**
+
+    :template:`templates/searchResults.html`
+    """
     doubts = Doubt.objects.filter(
         subject__name__contains=tag
     ).order_by(
@@ -54,6 +89,27 @@ def tagged_doubts(request, tag):
 
 
 def doubt_complete(request, pk):
+    """
+    Display an individual :model:`DoubtForum.Doubt`.
+    Display all :model:`DoubtForum.Comment` relate to the individual :model:`DoubtForum.Doubt`.
+    Display an individual :form:`DoubtForum.CommentForm`.
+    Creates a new :form:`DoubtForum.Comment` on POST.
+
+    **Context**
+
+    ``doubt``
+        An instance of :model:`DoubtForum.Doubt`.
+
+    ``comments``
+        Objects in comments are an instance of :model:`DoubtForum.Doubt`.
+
+    ``form``
+        An instance of :form:`DoubtForum.CommentForm`.
+
+    **Template:**
+
+    :template:`templates/doubtComplete.html`
+    """
     doubt = Doubt.objects.get(pk=pk)
 
     form = CommentForm()
@@ -78,6 +134,18 @@ def doubt_complete(request, pk):
 
 
 def subject_list(request):
+    """
+    Display all instances of :model:`DoubtForum.Subject`.
+
+    **Context**
+
+    ``doubts``
+        Objects in doubts are an instance of :model:`DoubtForum.Subject`.
+
+    **Template:**
+
+    :template:`templates/subjectList.html`
+    """
     tags = Subject.objects.all()
     context = {
         "tags": tags,
@@ -87,6 +155,19 @@ def subject_list(request):
 
 
 def search_doubt(request):
+    """
+    Display an individual :form:`DoubtForum.SearchForm`.
+    Redirects to :views:`DoubtForum.searched_doubts` on GET.
+
+    **Context**
+
+    ``form``
+        An instance of :form:`DoubtForum.SearchForm`.
+
+    **Template:**
+
+    :template:`templates/search.html`
+    """
     form = SearchForm()
 
     if request.method == 'GET':
@@ -103,6 +184,18 @@ def search_doubt(request):
 
 
 def searched_doubts(request):
+    """
+    Display all instances of :model:`DoubtForum.Doubt` based on the search query.
+
+    **Context**
+
+    ``doubts``
+        Objects in doubts are an instance of :model:`DoubtForum.Doubt`.
+
+    **Template:**
+
+    :template:`templates/searchResults.html`
+    """
     search_type = request.session.get('search_type')
     search_query = request.session.get('search_query')
     if search_type == "Author":
@@ -134,6 +227,18 @@ def searched_doubts(request):
 
 
 def doubt_sessions(request):
+    """
+    Display all instances of :model:`DoubtForum.DoubtSession`.
+
+    **Context**
+
+    ``doubts``
+        Objects in doubts are an instance of :model:`DoubtForum.DoubtSession`.
+
+    **Template:**
+
+    :template:`templates/schedule.html`
+    """
     sessions = DoubtSession.objects.all().order_by('-scheduled_for')
     context = {
         "sessions": sessions,

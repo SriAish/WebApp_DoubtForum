@@ -7,15 +7,13 @@
     <small>
         {{ doubt.created_on.date }} |&nbsp; {{ doubt.author }} |&nbsp;
         Subject:&nbsp;
-        {% for tag in doubt.subject.all %}
-        <a href="{% url 'tagged_doubts' tag.name %}">
-            {{ tag.name }}
+        <a href="{% url 'tagged_doubts' doubt.subject.name %}">
+            {{ doubt.subject.name }}
         </a>&nbsp;
-        {% endfor %}
     </small>    
     <hr/>
     
-        <div class="card text-dark bg-light mb-3">
+        <div class="card text-dark border-dark bg-light mb-3">
             <div class="card-body">
                 <p class="card-text">{{ doubt.body | linebreaks }}</p>
             
