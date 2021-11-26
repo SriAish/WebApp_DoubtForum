@@ -1,5 +1,6 @@
 from .models import *
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
 
 SEARCH_TYPES =(
@@ -20,13 +21,6 @@ class DoubtForm(forms.Form):
             "placeholder": "Doubt Heading"
         })
     )
-    author = forms.CharField(
-        max_length=60,
-        widget=forms.TextInput(attrs={
-            "class": "form-control",
-            "placeholder": "Your Name"
-        })
-    )
     body = forms.CharField(widget=forms.Textarea(
         attrs={
             "class": "form-control",
@@ -34,7 +28,6 @@ class DoubtForm(forms.Form):
         })
     )
     link = forms.URLField(
-        max_length=50,
         required=False,
         widget=forms.URLInput(attrs={
             "class": "form-control",
@@ -48,13 +41,6 @@ class CommentForm(forms.Form):
     """
     Class to collect information to create a comment object.
     """
-    author = forms.CharField(
-        max_length=60,
-        widget=forms.TextInput(attrs={
-            "class": "form-control",
-            "placeholder": "Your Name"
-        })
-    )
     body = forms.CharField(widget=forms.Textarea(
         attrs={
             "class": "form-control",
@@ -76,3 +62,18 @@ class SearchForm(forms.Form):
             "placeholder": "Search Query"
         })
     )
+
+
+class UserLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(UserLoginForm, self).__init__(*args, **kwargs)
+
+    username = UsernameField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': '', 'id': 'hello'}))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': '',
+            'id': 'hi',
+        }
+))
