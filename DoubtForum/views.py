@@ -253,6 +253,18 @@ def doubt_sessions(request):
 
 @login_required(login_url='/login')
 def user_doubts(request):
+    """
+    Display all instances of :model:`DoubtForum.Doubt` created by User.
+
+    **Context**
+
+    ``doubts``
+        Objects in doubts are an instance of :model:`DoubtForum.Doubt`.
+
+    **Template:**
+
+    :template:`templates/searchResults.html`
+    """
     doubts = Doubt.objects.filter(
             author=request.user
         ).order_by(
@@ -267,6 +279,13 @@ def user_doubts(request):
 
 
 class sign_up_view(generic.CreateView):
+    """
+    Display a form to create new active User.
+
+    **Template:**
+
+    :template:`templates/registration/signup.html`
+    """
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'

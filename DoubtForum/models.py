@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import User
 
 
 class Subject(models.Model):
@@ -45,7 +44,7 @@ class DoubtSession(models.Model):
     """
     Stores a single doubt session, related to :model:`DoubtForum.Subject`.
     """
-    professor = models.ForeignKey(User, on_delete=models.CASCADE,)
+    professor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
     body = models.TextField()
     scheduled_for = models.DateTimeField()
     subject = models.ForeignKey('Subject', on_delete=models.CASCADE)

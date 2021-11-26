@@ -13,6 +13,29 @@ The doubt forum helps a student reach out to all the students when they have dou
 - python >=3.6
 - django==3.2.9
 
+## Installation
+---
+Clone the repository:
+```
+git clone https://github.com/SriAish/WebApp_DoubtForum.git
+```
+
+## Usage
+---
+Enter the web application folder:
+```
+cd WebApp_DoubtForum
+```
+
+Run the web app server
+```
+python3 manage.py runserver
+```
+
+Server is deployed at: `http://127.0.0.1:8000/`
+
+You can access the web app at the above link using any browser.
+
 ## UI/UX
 ---
 ### Laptop view
@@ -49,26 +72,3 @@ Schedule:
 
 Admin page:
 ![admin](media/responsive_admin.png)
-
-## Installation
----
-Clone the repository:
-```
-git clone https://github.com/SriAish/WebApp_DoubtForum.git
-```
-
-## Usage
----
-Enter the web application folder:
-```
-cd WebApp_DoubtForum
-```
-
-Run the web app server
-```
-python3 manage.py runserver
-```
-
-Server is deployed at: `http://127.0.0.1:8000/`
-
-You can access the web app at the above link using any browser.
