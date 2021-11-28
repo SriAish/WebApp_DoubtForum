@@ -14,9 +14,13 @@ class Subject(models.Model):
 
 class Doubt(models.Model):
     """
-    Stores a single doubt, related to :model:`DoubtForum.Subject`.
+    Stores a single doubt, related
+    to :model:`DoubtForum.Subject`.
     """
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
     title = models.CharField(max_length=160)
     body = models.TextField()
     link = models.URLField(max_length=50, null=True, blank=True)
@@ -29,9 +33,13 @@ class Doubt(models.Model):
 
 class Comment(models.Model):
     """
-    Stores a single comment, related to :model:`DoubtForum.Doubt`.
+    Stores a single comment, related
+    to :model:`DoubtForum.Doubt`.
     """
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     doubt = models.ForeignKey('Doubt', on_delete=models.CASCADE)
@@ -42,13 +50,17 @@ class Comment(models.Model):
 
 class DoubtSession(models.Model):
     """
-    Stores a single doubt session, related to :model:`DoubtForum.Subject`.
+    Stores a single doubt session, related
+    to :model:`DoubtForum.Subject`.
     """
-    professor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
+    professor = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
     body = models.TextField()
     scheduled_for = models.DateTimeField()
     subject = models.ForeignKey('Subject', on_delete=models.CASCADE)
     link_to_session = models.URLField(max_length=50, null=True, blank=True)
-    
+
     def __str__(self):
         return str(self.subject.name)

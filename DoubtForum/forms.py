@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 
 
-SEARCH_TYPES =(
+SEARCH_TYPES = (
     ("Title", "Title"),
     ("Author", "Author"),
     ("Subject", "Subject"),
@@ -57,10 +57,11 @@ class SearchForm(forms.Form):
     search_query = forms.CharField(
         max_length=60,
         widget=forms.TextInput(
-        attrs={
-            "class": "form-control",
-            "placeholder": "Search Query"
-        })
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Search Query',
+            }
+        )
     )
 
 
@@ -75,5 +76,5 @@ class UserLoginForm(AuthenticationForm):
             'class': 'form-control',
             'placeholder': '',
             'id': 'hi',
-        }
-))
+        })
+    )

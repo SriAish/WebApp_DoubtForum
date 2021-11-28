@@ -6,6 +6,7 @@ from django.views import generic
 from .models import *
 from .forms import *
 
+
 def home(request):
     """
     Display all instances of :model:`DoubtForum.Doubt`.
@@ -69,7 +70,8 @@ def add_doubt(request):
 
 def tagged_doubts(request, tag):
     """
-    Display all instances od :model:`DoubtForum.Doubt` with :model:`DoubtForum.Doubt.subject` = tag.
+    Display all instances od :model:`DoubtForum.Doubt`
+    with :model:`DoubtForum.Doubt.subject` = tag.
 
     **Context**
 
@@ -95,7 +97,8 @@ def tagged_doubts(request, tag):
 def doubt_complete(request, pk):
     """
     Display an individual :model:`DoubtForum.Doubt`.
-    Display all :model:`DoubtForum.Comment` relate to the individual :model:`DoubtForum.Doubt`.
+    Display all :model:`DoubtForum.Comment`
+    related to the individual :model:`DoubtForum.Doubt`.
     Display an individual :form:`DoubtForum.CommentForm`.
     Creates a new :form:`DoubtForum.Comment` on POST.
 
@@ -189,7 +192,8 @@ def search_doubt(request):
 
 def searched_doubts(request):
     """
-    Display all instances of :model:`DoubtForum.Doubt` based on the search query.
+    Display all instances of :model:`DoubtForum.Doubt`
+    based on the search query.
 
     **Context**
 

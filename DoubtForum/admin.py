@@ -7,8 +7,18 @@ class SubjectAdmin(admin.ModelAdmin):
     pass
 
 
+class CommentAdmin(admin.ModelAdmin):
+    pass
+
+
+class DoubtAdmin(admin.ModelAdmin):
+    pass
+
+
 class DoubtSessionAdmin(admin.ModelAdmin):
-    """Allows Staff and Superusers to create, edit and delete doubt sessions."""
+    """
+    Allows Staff and Superusers to create, edit and delete doubt sessions.
+    """
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         """Allows Staff to only fill themselves as Creators of Doubt Session"""
         if db_field.name == "professor":
@@ -23,9 +33,12 @@ class DoubtSessionAdmin(admin.ModelAdmin):
         """Allows Staff to only see and edit doubt sessions created by them"""
         qs = super(DoubtSessionAdmin, self).get_queryset(request)
         if request.user.is_superuser:
-                return qs
+            return qs
         print(request.user.username)
         return qs.filter(professor=request.user)
 
+
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(DoubtSession, DoubtSessionAdmin)
+admin.site.register(Doubt, DoubtAdmin)
+admin.site.register(Comment, CommentAdmin)

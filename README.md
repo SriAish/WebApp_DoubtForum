@@ -36,8 +36,12 @@ Server is deployed at: `http://127.0.0.1:8000/`
 
 You can access the web app at the above link using any browser.
 
+## Video Demo
+See a video demo of the app [here](https://youtu.be/EGoax7NDi-c).
+
 ## UI/UX
 ---
+
 ### Laptop view
 Home page:
 ![home](media/home.png)
